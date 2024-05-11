@@ -18,7 +18,7 @@ public class UserMapper {
                 user.getMobileNo(),
                 user.getAddress(),
                 user.getRole(),
-                user.getPassword()
+                user.getPassword()!=null ? this.passwordEncoder.encode(user.getPassword()) : null
         );
     }
     public User mapDtoToUser(UserDto userDto) {
@@ -29,7 +29,7 @@ public class UserMapper {
                 userDto.getMobileNo(),
                 userDto.getAddress(),
                 userDto.getRole(),
-                userDto.getPassword()
+                userDto.getPassword() != null ? this.passwordEncoder.encode(userDto.getPassword()) : null
 
         );
     }

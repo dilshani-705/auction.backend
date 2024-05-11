@@ -61,7 +61,7 @@ public class User implements Serializable{
     }
 
     public void setPassword(String password, PasswordEncoder passwordEncoder) {
-        this.password = password;
+        this.password = passwordEncoder.encode(password);
     }
 
     @Override
