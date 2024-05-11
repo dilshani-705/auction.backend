@@ -9,6 +9,8 @@ import com.advancedJava.auction.backend.User.Service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.apache.coyote.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,7 @@ import java.util.Optional;
 @RequestMapping("/api/user")
 public class UserController {
     private  UserService userService;
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginDto loginDto) throws Exception {
         LoginMessage loginMessage =userService.login(loginDto);
@@ -60,14 +63,18 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
     @PutMapping("/{userId}")
-    public ResponseEntity<UserDto>updateUser(@PathVariable("userId") String userId, @RequestBody UserDto updatedUser){
-        UserDto user = null;
+    public ResponseEntity<UserDto>updateUser(@PathVariable("userId") String user_Id, @RequestBody UserDto updatedUser) throws Exception {
+        logger.info("Updating user with ID: " + user_Id);
+        logger.info("New user data: " + updatedUser.toString());
+
         try {
-            user = userService.updateUser(userId, updatedUser);
+            UserDto userDto = userService.updateUser(user_Id, updatedUser);
+            return ResponseEntity.ok(userDto);
         } catch (Exception e) {
+            logger.error("Error updating user: ", e);
             throw new RuntimeException(e);
         }
-        return ResponseEntity.ok(user);
+
     }
     @DeleteMapping("/{userId}")
     public ResponseEntity<String>deleteUser(@PathVariable("userId") String userId){
