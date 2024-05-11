@@ -1,5 +1,7 @@
 package com.advancedJava.auction.backend.User.Controller;
 
+import com.advancedJava.auction.backend.Login.LoginDto;
+import com.advancedJava.auction.backend.Login.LoginMessage;
 import com.advancedJava.auction.backend.User.Dto.ResponseTypeEnum;
 import com.advancedJava.auction.backend.User.Dto.UserDto;
 import com.advancedJava.auction.backend.User.Entity.User;
@@ -20,6 +22,11 @@ import java.util.Optional;
 @RequestMapping("/api/user")
 public class UserController {
     private  UserService userService;
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody LoginDto loginDto) throws Exception {
+        LoginMessage loginMessage =userService.login(loginDto);
+        return ResponseEntity.ok(loginMessage);
+    }
 
     @PostMapping("/add")
     public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto){

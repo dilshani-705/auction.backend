@@ -1,10 +1,10 @@
 package com.advancedJava.auction.backend.User.Service;
 
+import com.advancedJava.auction.backend.Login.LoginDto;
+import com.advancedJava.auction.backend.Login.LoginMessage;
 import com.advancedJava.auction.backend.User.Dto.UserDto;
-import com.advancedJava.auction.backend.User.Entity.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
     UserDto getUserById(String userId)throws Exception;
@@ -16,6 +16,9 @@ public interface UserService {
     UserDto updateUser(String userId, UserDto updatedUser) throws Exception;
 
     void deleteUser(String userId)throws Exception;
+
+
+    LoginMessage login(LoginDto userDto) throws Exception;
 
 
 }
