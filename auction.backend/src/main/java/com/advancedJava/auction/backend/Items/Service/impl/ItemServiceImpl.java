@@ -31,24 +31,38 @@ public class ItemServiceImpl implements ItemService {
         }
 
         @Override
-        public ItemDto updateItem(Long itemId, ItemDto updateItem) {
+        public ItemDto getItemById(String itemId) {
+            Item item = itemRepository.findById(itemId).orElseThrow(
+                    () -> new ResourceNotFoundException("Item is not exists with given id:" + itemId)
+            );
+
+            return ItemMapper.mapToItemDto(item);
+        }
+
+        @Override
+        public ItemDto updateItem(String itemId, ItemDto updateItem) {
 
             Item item = itemRepository.findById(itemId).orElseThrow(
                     ()-> new ResourceNotFoundException("Item is not exists with given id:" + itemId)
             );
 
-            item.setName(updateItem.getName());
+            item.setItemName(updateItem.getItemName());
             item.setDescription(updateItem.getDescription());
+            item.setStarting_price(updateItem.getStarting_price());
+            item.setCategory(updateItem.getCategory());
+            item.setStartDateTime(updateItem.getStartDateTime());
+            item.setEndDateTime(updateItem.getEndDateTime());
             item.setImageUrl(updateItem.getImageUrl());
 
             Item updateItemObj = itemRepository.save(item);
+
 
             return ItemMapper.mapToItemDto(updateItemObj);
         }
 
         // Delete Outgoing by Id
         @Override
-        public void deleteItem(Long itemId) {
+        public void deleteItem(String itemId) {
             Item item = itemRepository.findById(itemId).orElseThrow(
                     () -> new ResourceNotFoundException("Item is not exists with given id:" + itemId)
             );

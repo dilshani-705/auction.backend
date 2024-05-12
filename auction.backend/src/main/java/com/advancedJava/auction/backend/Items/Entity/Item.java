@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,17 +16,28 @@ import lombok.Setter;
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Item_id;
+    private String itemId;
 
-    private String name;
+    @Column (name="itemName")
+    private String itemName;
 
+    @Column (name="description")
     private String description;
 
+    @Column (name="starting_price")
     private Float starting_price;
 
+    @Column (name="category")
     private String category;
 
-    private String imageUrl;
+    @Column(name = "start_date_time")
+    private String startDateTime;
+
+    @Column(name = "end_date_time")
+    private String endDateTime;
+
+    @Lob
+    @Column(name = "imageUrl", columnDefinition = "LONGBLOB")
+    private byte[] imageUrl;
 
 }

@@ -1,17 +1,23 @@
 package com.advancedJava.auction.backend.Items.Dto;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
+
 public class ItemDto {
 
-        private long Item_id;
+        private String itemId;
 
-        private String name;
+        private String itemName;
 
         private String description;
 
@@ -19,6 +25,10 @@ public class ItemDto {
 
         private String category;
 
-        private String imageUrl;
+        private String startDateTime;
+
+        private String endDateTime;
+
+        private byte[] imageUrl;
 
 }

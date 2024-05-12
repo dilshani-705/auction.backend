@@ -8,8 +8,10 @@ public interface ItemService {
 
     List<ItemDto> getAllItem();
 
-    ItemDto updateItem(Long itemId, ItemDto updateItem);
+    ItemDto updateItem(String itemId, ItemDto updateItem);
 
     // Delete Outgoing by Id
-    void deleteItem(Long itemId);
+    void deleteItem(String itemId);
+
+    ItemDto getItemById(String itemId);
 }
